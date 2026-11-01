@@ -28,8 +28,8 @@ export function analyse(f: Field, w: WeatherData, logs: IrrigationLog[]) {
   const cp = simulate(p, hist, "croppulse");
   const tr = simulate(p, hist, "traditional");
   const savings: SavingsDay[] = hist.map((d, i) => {
-    const t = tr[i].irrigationGross * p.areaM2;
-    const c = cp[i].irrigationGross * p.areaM2;
+    const t = tr[i]!.irrigationGross * p.areaM2;
+    const c = cp[i]!.irrigationGross * p.areaM2;
     return { date: d.date, traditionalL: t, croppulseL: c, savedL: t - c };
   });
   return { params: p, sim, todayIdx, rec, savings, start };
@@ -44,7 +44,7 @@ export function useFieldAnalysis(f: Field | undefined, logs: IrrigationLog[]) {
 
 export function useAllAnalyses(fields: Field[], logs: IrrigationLog[]) {
   const qs = useQueries({ queries: fields.map((f) => weatherQuery(f.lat, f.lon)) });
-  return fields.map((f, i) => ({ field: f, q: qs[i], a: qs[i].data ? analyse(f, qs[i].data!, logs) : undefined }));
+  return fields.map((f, i) => ({ field: f, q: qs[i]!, a: qs[i]?.data ? analyse(f, qs[i]!.data!, logs) : undefined }));
 }
 
 export function fmtVol(litres: number, unit: "L" | "m3") {

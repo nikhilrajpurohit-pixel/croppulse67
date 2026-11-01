@@ -59,7 +59,7 @@ export async function fetchWeather(lat: number, lon: number): Promise<WeatherDat
       code: j.current.weather_code,
     },
     history: days.filter((x) => x.date < today),
-    todayDay: days.find((x) => x.date === today) ?? days[days.length - 8],
+    todayDay: days.find((x) => x.date === today) ?? days[days.length - 8]!,
     forecast: days.filter((x) => x.date > today),
   };
 }

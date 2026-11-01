@@ -77,9 +77,9 @@ export interface FieldParams {
   method: MethodKey;
   areaM2: number;
   initialMoisture: number; // volumetric %, e.g. 22
-  rootDepth?: number; // m
-  fieldCapacity?: number; // volumetric %
-  wiltingPoint?: number; // volumetric %
+  rootDepth?: number | undefined; // m
+  fieldCapacity?: number | undefined;
+  wiltingPoint?: number | undefined;
 }
 
 export function soilProfile(f: FieldParams) {
