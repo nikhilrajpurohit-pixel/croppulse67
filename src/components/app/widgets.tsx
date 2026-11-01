@@ -148,7 +148,7 @@ function LogIrrigation({ field, suggested }: { field: Field; suggested: number }
           if (!(v > 0 && v < 300)) return toast.error("Enter a depth between 0 and 300 mm");
           if (date > today || date < field.moistureDate) return toast.error("Date must be between the moisture start date and today");
           actions.addLog({ fieldId: field.id, date, appliedMm: v, recommendedMm: suggested });
-          toast.success("Irrigation recorded"); setOpen(false);
+          toast.success("Irrigation recorded"); setOpen(false); return undefined;
         }}>
           <label className="block text-sm">Date<Input type="date" value={date} max={today} min={field.moistureDate} onChange={(e) => setDate(e.target.value)} /></label>
           <label className="block text-sm">Water applied (mm depth at field)<Input type="number" step="0.1" value={mm} onChange={(e) => setMm(e.target.value)} /></label>
@@ -214,9 +214,9 @@ export function FieldFacts({ field }: { field: Field }) {
       <h2 className="text-lg font-semibold">Field profile</h2>
       <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-3">
         <Stat label="Crop" value={cropName(field)} sub={`Kc ${kcFor(field.crop, field.stage).toFixed(2)}`} />
-        <Stat label="Growth stage" value={field.stage === "mid" ? "Mid-season" : field.stage[0].toUpperCase() + field.stage.slice(1)} />
+        <Stat label="Growth stage" value={field.stage === "mid" ? "Mid-season" : field.stage[0]!.toUpperCase() + field.stage.slice(1)} />
         <Stat label="Area" value={`${field.area} ${field.areaUnit}`} />
-        <Stat label="Soil" value={field.soil[0].toUpperCase() + field.soil.slice(1)} />
+        <Stat label="Soil" value={field.soil[0]!.toUpperCase() + field.soil.slice(1)} />
         <Stat label="Method" value={METHODS[field.method].label.replace(" irrigation", "")} sub={`${METHODS[field.method].efficiency * 100}% efficient`} />
         <Stat label="Start moisture" value={`${field.initialMoisture}%`} sub={field.moistureSource === "sensor" ? "Sensor reading" : "Manual estimate"} />
       </div>

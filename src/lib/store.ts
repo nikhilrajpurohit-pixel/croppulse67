@@ -32,7 +32,7 @@ export interface Profile {
   defaultLocation: string;
   notify: { rain: boolean; irrigation: boolean; moisture: boolean; system: boolean };
 }
-export interface AppState { loaded: boolean; fields: Field[]; logs: IrrigationLog[]; notices: Notice[]; profile: Profile; selectedFieldId?: string }
+export interface AppState { loaded: boolean; fields: Field[]; logs: IrrigationLog[]; notices: Notice[]; profile: Profile; selectedFieldId?: string | undefined }
 
 const KEY = "croppulse-v1";
 const defaultProfile: Profile = {

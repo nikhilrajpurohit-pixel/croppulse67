@@ -31,6 +31,6 @@ describe("agro engine", () => {
   it("storage drops by Kc*ET0 on a dry day", () => {
     const s = simulate(field, dry(1), "logged");
     const { taw } = soilProfile(field);
-    expect(s[0].storage).toBeCloseTo(taw - 1.15 * 5);
+    expect(s[0]!.storage).toBeCloseTo(taw - 1.15 * 5);
   });
 });
