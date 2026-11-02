@@ -49,19 +49,19 @@ export function FieldForm({ initial }: { initial?: Field }) {
     finally { setBusy(false); }
   }
   function gps() {
-    if (!navigator.geolocation) return toast.error("Location not available on this device.");
+    if (!navigator.geolocation) { toast.error("Location not available on this device."); return; }
     navigator.geolocation.getCurrentPosition(
       (p) => { up({ lat: p.coords.latitude, lon: p.coords.longitude, location: `GPS ${p.coords.latitude.toFixed(3)}, ${p.coords.longitude.toFixed(3)}` }); setResults([]); },
-      () => toast.error("Couldn't get your location."),
+      () => { toast.error("Couldn't get your location."); },
     );
   }
   function save(e: React.FormEvent) {
     e.preventDefault();
-    if (!f.name.trim()) return toast.error("Give the field a name.");
-    if (!Number.isFinite(f.lat)) return toast.error("Choose the field location.");
-    if (!(f.area > 0)) return toast.error("Area must be greater than zero.");
-    if (f.crop === "other" && !f.cropOther?.trim()) return toast.error("Enter the crop name.");
-    if (f.fieldCapacity && f.wiltingPoint && f.wiltingPoint >= f.fieldCapacity) return toast.error("Wilting point must be below field capacity.");
+    if (!f.name.trim()) { toast.error("Give the field a name."); return; }
+    if (!Number.isFinite(f.lat)) { toast.error("Choose the field location."); return; }
+    if (!(f.area > 0)) { toast.error("Area must be greater than zero."); return; }
+    if (f.crop === "other" && !f.cropOther?.trim()) { toast.error("Enter the crop name."); return; }
+    if (f.fieldCapacity && f.wiltingPoint && f.wiltingPoint >= f.fieldCapacity) { toast.error("Wilting point must be below field capacity."); return; }
     actions.saveField({ ...f, initialMoisture: Math.min(100, Math.max(0, f.initialMoisture)) });
     toast.success(initial ? "Field updated" : "Field added");
     nav({ to: "/fields/$id", params: { id: f.id } });
