@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as WaterSavedRouteImport } from './routes/water-saved'
+import { Route as FieldsIndexRouteImport } from './routes/fields.index'
+import { Route as FieldsIdRouteImport } from './routes/fields.$id'
+import { Route as FieldsNewRouteImport } from './routes/fields.new'
+import { Route as FieldsIdEditRouteImport } from './routes/fields.$id_.edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WaterSavedRoute = WaterSavedRouteImport.update({
+  id: '/water-saved',
+  path: '/water-saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FieldsIndexRoute = FieldsIndexRouteImport.update({
+  id: '/fields/',
+  path: '/fields/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FieldsIdRoute = FieldsIdRouteImport.update({
+  id: '/fields/$id',
+  path: '/fields/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FieldsNewRoute = FieldsNewRouteImport.update({
+  id: '/fields/new',
+  path: '/fields/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FieldsIdEditRoute = FieldsIdEditRouteImport.update({
+  id: '/fields/$id_/edit',
+  path: '/fields/$id/edit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
+  '/water-saved': typeof WaterSavedRoute
+  '/fields/$id': typeof FieldsIdRoute
+  '/fields/new': typeof FieldsNewRoute
+  '/fields/': typeof FieldsIndexRoute
+  '/fields/$id/edit': typeof FieldsIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
+  '/water-saved': typeof WaterSavedRoute
+  '/fields/$id': typeof FieldsIdRoute
+  '/fields/new': typeof FieldsNewRoute
+  '/fields': typeof FieldsIndexRoute
+  '/fields/$id/edit': typeof FieldsIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
+  '/water-saved': typeof WaterSavedRoute
+  '/fields/$id': typeof FieldsIdRoute
+  '/fields/new': typeof FieldsNewRoute
+  '/fields/': typeof FieldsIndexRoute
+  '/fields/$id_/edit': typeof FieldsIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/profile'
+    | '/water-saved'
+    | '/fields/$id'
+    | '/fields/new'
+    | '/fields/'
+    | '/fields/$id/edit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/profile'
+    | '/water-saved'
+    | '/fields/$id'
+    | '/fields/new'
+    | '/fields'
+    | '/fields/$id/edit'
+  id:
+    | '__root__'
+    | '/'
+    | '/profile'
+    | '/water-saved'
+    | '/fields/$id'
+    | '/fields/new'
+    | '/fields/'
+    | '/fields/$id_/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProfileRoute: typeof ProfileRoute
+  WaterSavedRoute: typeof WaterSavedRoute
+  FieldsIdRoute: typeof FieldsIdRoute
+  FieldsNewRoute: typeof FieldsNewRoute
+  FieldsIndexRoute: typeof FieldsIndexRoute
+  FieldsIdEditRoute: typeof FieldsIdEditRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/water-saved': {
+      id: '/water-saved'
+      path: '/water-saved'
+      fullPath: '/water-saved'
+      preLoaderRoute: typeof WaterSavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fields/': {
+      id: '/fields/'
+      path: '/fields'
+      fullPath: '/fields/'
+      preLoaderRoute: typeof FieldsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fields/$id': {
+      id: '/fields/$id'
+      path: '/fields/$id'
+      fullPath: '/fields/$id'
+      preLoaderRoute: typeof FieldsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fields/new': {
+      id: '/fields/new'
+      path: '/fields/new'
+      fullPath: '/fields/new'
+      preLoaderRoute: typeof FieldsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fields/$id_/edit': {
+      id: '/fields/$id_/edit'
+      path: '/fields/$id/edit'
+      fullPath: '/fields/$id/edit'
+      preLoaderRoute: typeof FieldsIdEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProfileRoute: ProfileRoute,
+  WaterSavedRoute: WaterSavedRoute,
+  FieldsIdRoute: FieldsIdRoute,
+  FieldsNewRoute: FieldsNewRoute,
+  FieldsIndexRoute: FieldsIndexRoute,
+  FieldsIdEditRoute: FieldsIdEditRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
