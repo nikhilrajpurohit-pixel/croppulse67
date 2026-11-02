@@ -18,7 +18,7 @@ export function LevelChip({ level, className }: { level: RecLevel; className?: s
   return <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold", levelStyle[level].chip, className)}><span className={cn("size-2 rounded-full", levelStyle[level].bar)} />{levelStyle[level].label}</span>;
 }
 
-export function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
+export function Stat({ label, value, sub }: { label: string; value: string; sub?: string | undefined }) {
   return (
     <div className="rounded-2xl bg-muted p-3">
       <p className="text-xs text-muted-foreground">{label}</p>

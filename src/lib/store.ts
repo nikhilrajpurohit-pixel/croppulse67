@@ -17,9 +17,9 @@ export interface Field {
   initialMoisture: number;
   moistureSource: "estimate" | "sensor";
   moistureDate: string; // YYYY-MM-DD the reading applies to
-  rootDepth?: number;
-  fieldCapacity?: number;
-  wiltingPoint?: number;
+  rootDepth?: number | undefined;
+  fieldCapacity?: number | undefined;
+  wiltingPoint?: number | undefined;
   createdAt: number;
 }
 export interface IrrigationLog { id: string; fieldId: string; date: string; appliedMm: number; recommendedMm: number }
