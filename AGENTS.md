@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- App data (fields, irrigation logs, profile) lives in a browser-local store (src/lib/store.ts); irrigation maths stays pure in src/lib/agro.ts so it can be unit-tested and later moved to a backend.
